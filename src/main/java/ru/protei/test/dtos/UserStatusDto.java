@@ -6,33 +6,29 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.protei.test.domains.Status;
-import ru.protei.test.json.StatusDeserializer;
-import ru.protei.test.json.StatusSerializer;
 
+@JsonInclude(NON_NULL)
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserStatusDto implements Dto {
 
-  @NotNull private Long id;
+  @JsonProperty(access = READ_ONLY)
+  private Long id;
 
   @JsonProperty(access = WRITE_ONLY)
-  @JsonInclude(NON_NULL)
-  @JsonDeserialize(using = StatusDeserializer.class)
   private Status status;
 
   @JsonProperty(access = READ_ONLY)
-  @JsonInclude(NON_NULL)
-  @JsonSerialize(using = StatusSerializer.class)
   private Status oldStatus;
 
   @JsonProperty(access = READ_ONLY)
-  @JsonInclude(NON_NULL)
-  @JsonSerialize(using = StatusSerializer.class)
   private Status newStatus;
 }
