@@ -3,6 +3,9 @@ package ru.protei.test.domains;
 import static java.lang.String.format;
 import static lombok.AccessLevel.PRIVATE;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,22 +20,25 @@ public enum Status implements Serializable {
   AWAY("Away"),
   OFFLINE("Offline");
 
+  @JsonValue
+  @JsonProperty("status")
   private final String name;
 
   /**
    * Parse Status object from corresponding name ignoring case.
    *
-   * @param name name to parse
+   * @param status name to parse
    * @return parsed Status object
    * @throws java.lang.IllegalArgumentException if there is no corresponding Status object
    */
   @NonNull
-  public static Status forName(final @NonNull String name) throws IllegalArgumentException {
-    for (final var status : values()) {
-      if (status.getName().equalsIgnoreCase(name.trim())) {
-        return status;
+  @JsonCreator
+  public static Status forName(final @NonNull String status) throws IllegalArgumentException {
+    for (final var obj : values()) {
+      if (obj.getName().equalsIgnoreCase(status.trim())) {
+        return obj;
       }
     }
-    throw new IllegalArgumentException(format("Status for name %s was not found.", name));
+    throw new IllegalArgumentException(format("Status for name %s was not found.", status));
   }
 }
