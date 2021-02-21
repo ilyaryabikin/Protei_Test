@@ -1,9 +1,11 @@
 package ru.protei.test.mappers;
 
+import org.springframework.stereotype.Component;
 import ru.protei.test.domains.User;
 import ru.protei.test.dtos.UserIdDto;
 import ru.protei.test.exceptions.IllegalMappingOperationException;
 
+@Component("userIdMapper")
 public class UserIdMapper implements Mapper<User, UserIdDto> {
 
   @Override

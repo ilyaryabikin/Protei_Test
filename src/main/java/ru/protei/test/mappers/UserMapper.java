@@ -1,9 +1,11 @@
 package ru.protei.test.mappers;
 
+import org.springframework.stereotype.Component;
 import ru.protei.test.domains.User;
 import ru.protei.test.dtos.UserDto;
 import ru.protei.test.exceptions.IllegalMappingOperationException;
 
+@Component("userMapper")
 public class UserMapper implements Mapper<User, UserDto> {
 
   @Override
@@ -13,7 +15,6 @@ public class UserMapper implements Mapper<User, UserDto> {
         .name(dto.getName())
         .surname(dto.getSurname())
         .phoneNumber(dto.getPhoneNumber())
-        .status(dto.getStatus())
         .build();
   }
 
@@ -26,6 +27,7 @@ public class UserMapper implements Mapper<User, UserDto> {
         .surname(persistable.getSurname())
         .phoneNumber(persistable.getPhoneNumber())
         .status(persistable.getStatus())
+        .lastOnlineChange(persistable.getLastOnlineChange())
         .build();
   }
 }
