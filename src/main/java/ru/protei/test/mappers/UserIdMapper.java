@@ -12,7 +12,7 @@ public class UserIdMapper implements Mapper<User, UserIdDto> {
   }
 
   @Override
-  public UserIdDto mapToDto(final User persistable) {
+  public UserIdDto mapToDto(final User persistable) throws IllegalMappingOperationException {
     return new UserIdDto(persistable.getId());
   }
 }
