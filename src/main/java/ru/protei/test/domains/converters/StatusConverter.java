@@ -1,7 +1,5 @@
 package ru.protei.test.domains.converters;
 
-import static java.lang.String.format;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import org.springframework.lang.Nullable;
@@ -16,7 +14,6 @@ public class StatusConverter implements AttributeConverter<Status, String> {
     if (attribute == null) {
       return null;
     }
-
     return attribute.getName();
   }
 
@@ -26,13 +23,6 @@ public class StatusConverter implements AttributeConverter<Status, String> {
     if (dbData == null) {
       return null;
     }
-
-    for (final var status : Status.values()) {
-      if (status.getName().equals(dbData)) {
-        return status;
-      }
-    }
-
-    throw new IllegalArgumentException(format("Status with value %s was not found.", dbData));
+    return Status.forName(dbData);
   }
 }
