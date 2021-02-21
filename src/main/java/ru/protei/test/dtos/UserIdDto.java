@@ -1,14 +1,17 @@
 package ru.protei.test.dtos;
 
-import static lombok.AccessLevel.PRIVATE;
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor(access = PRIVATE)
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserIdDto implements Dto {
+
+  @JsonProperty(access = READ_ONLY)
   private Long id;
 }
