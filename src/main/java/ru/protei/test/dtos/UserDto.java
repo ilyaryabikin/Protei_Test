@@ -25,19 +25,19 @@ public class UserDto implements Dto {
   @JsonProperty(access = READ_ONLY)
   private Long id;
 
-  @Email
-  @Size(max = 128)
-  @NotNull
+  @Email(message = "User's email is in incorrect format")
+  @Size(max = 128, message = "User's email should not exceed 128 characters")
+  @NotNull(message = "User's email should not be null")
   private String email;
 
-  @Size(max = 128)
+  @Size(max = 128, message = "User's name should not exceed 128 characters")
   private String name;
 
-  @Size(max = 128)
+  @Size(max = 128, message = "User's surname should not exceed 128 characters")
   private String surname;
 
-  @Size(max = 128)
-  @PhoneNumber
+  @Size(max = 128, message = "User's phone number should not exceed 128 characters")
+  @PhoneNumber(message = "User's phone number is in incorrect format")
   private String phoneNumber;
 
   private Status status;

@@ -43,37 +43,37 @@ public class User implements Persistable<Long>, Serializable {
   @EqualsAndHashCode.Include
   private Long id;
 
-  @Email
-  @Size(max = 128)
-  @NotNull
+  @Email(message = "User's email is in incorrect format")
+  @Size(max = 128, message = "User's email should not exceed 128 characters")
+  @NotNull(message = "User's email should not be null")
   @NaturalId
   @Column(length = 128, unique = true, nullable = false)
   @EqualsAndHashCode.Include
   private String email;
 
-  @Size(max = 128)
-  @NotNull
+  @Size(max = 128, message = "User's name should not exceed 128 characters")
+  @NotNull(message = "User's name should not be null")
   @Column(length = 128, nullable = false)
   private String name;
 
-  @Size(max = 128)
-  @NotNull
+  @Size(max = 128, message = "User's surname should not exceed 128 characters")
+  @NotNull(message = "User's surname should not be null")
   @Column(length = 128, nullable = false)
   private String surname;
 
-  @Size(max = 128)
-  @PhoneNumber
-  @NotNull
+  @Size(max = 128, message = "User's phone number should not exceed 128 characters")
+  @PhoneNumber(message = "User's phone number is in incorrect format")
+  @NotNull(message = "User's phone number should not be null")
   @Column(length = 128, nullable = false)
   private String phoneNumber;
 
   @Convert(converter = StatusConverter.class)
-  @NotNull
+  @NotNull(message = "User's status should not be null")
   @Column(nullable = false)
   @Builder.Default
   private Status status = OFFLINE;
 
-  @PastOrPresent
+  @PastOrPresent(message = "User's last online change should be past or present date")
   @Column(name = "last_online_change")
   private Instant lastOnlineChange;
 
